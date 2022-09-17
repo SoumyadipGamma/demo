@@ -20,6 +20,12 @@ pipeline {
                 echo "Testing my code"
             }
         }
+        
+        stage('Deploy to Prod') {
+            steps {
+                echo "Deploying my code to prod"
+            }
+        }        
     }
 }
 
