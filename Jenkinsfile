@@ -3,27 +3,21 @@ pipeline {
     agent any
 
     stages {    
-        stage('SCM') {
+        stage('Pull from SCM') {
             steps {
-                echo "git pull my code"
+                git 'https://github.com/opendoc-tree/javademo.git'
             }
         }
 
-        stage('Deploy') {
+        stage('Build') {
             steps { 
-                echo "Deploying my code"
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo "Testing my code"
+                sh 'mvn clean package'
             }
         }
         
-        stage('Deploy to Prod') {
+        stage('Deploy') {
             steps {
-                echo "Deploying my code to prod"
+                sh 'java -jar target/*.jar'
             }
         }        
     }
